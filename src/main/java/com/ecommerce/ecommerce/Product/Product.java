@@ -15,8 +15,7 @@ import lombok.Setter;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int productId;
+    private long id;
     private String name;
     private BigDecimal price;
-
 }

@@ -7,9 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import jakarta.transaction.Transactional;
 
 public interface ProductRepository extends CrudRepository<Product, Integer> {
-    List<Product> findByEmail(String email);
-
-    @Transactional
-    long deleteByEmail(String email);
 
 }
