@@ -8,6 +8,8 @@ import com.ecommerce.ecommerce.CartItem.CartItem;
 import com.ecommerce.ecommerce.Customer.Customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +33,7 @@ public class Cart {
     private Set<CartItem> items;
     private BigDecimal totalValue;
 
-    @OneToOne(mappedBy = "cart")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 }
