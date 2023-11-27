@@ -37,15 +37,18 @@ public class Customer {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    @OneToOne(mappedBy = "customer")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private Cart cart;
 
     @OneToMany(mappedBy = "customer")
     private Set<CompletedOrder> orderHistory;
 
-    public Customer(String email, String name, Address address) {
+    public Customer(String email, String name, String passwordHash, Address address) {
         this.email = email;
         this.name = name;
+        this.passwordHash = passwordHash;
         this.address = address;
+        this.cart = new Cart();
     }
 }

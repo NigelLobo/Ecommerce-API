@@ -29,11 +29,13 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart") // TODO: why are items not showing up on GET ?
     private Set<CartItem> items;
-    private BigDecimal totalValue;
+    private BigDecimal totalValue = new BigDecimal(0);
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private Customer customer;
+    public void addItemToCart(CartItem cartItem) {
+        this.items.add(cartItem);
+        BigDecimal quantity = new BigDecimal((long) cartItem.getQuantity());
+        this.totalValue.add(quantity.multiply(cartItem.getProduct().getPrice()));
+    }
 }
